@@ -82,6 +82,12 @@
 		$status = false;
 		$fopen_status = "&#10060;";
 	}
+	if ( function_exists("escapeshellarg")) {
+        $escapeshellarg_status = "&#9989;";
+    } else {
+        $status = false;
+		$escapeshellarg_status = "&#10060;";
+    }
 	if ($status == true) {
 		$babl_status = "<span style=\"font-weight:bold;font-size: 1.2em;color: green;\">Babl is compatable!</span>";
 	} else {
@@ -122,13 +128,15 @@
 		<br>
 		allow_url_fopen: <?php echo $fopen_status; ?>
 		<br>
+		escapeshellarg: <?php echo $escapeshellarg_status; ?>
+		<br>
 		<br>
 		Most are the settings can be changed via your WebHosting providers panel
 		
 		
 	</body>
 	<style>
-		body {background-color: #36393f;text-align: center;color:grey;}
+		body {background-color: #36393f;text-align: center;color:grey;font-family: sans-serif;}
 	</style>
 
 
