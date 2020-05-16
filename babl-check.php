@@ -7,17 +7,18 @@ if (version_compare(phpversion(), '7.2', '<') || version_compare(phpversion(), '
 	$php_status = "Your PHP Version is compatable";
 }
 $extentions = array(
-	array("Name" => "OpenSSL", "Extention" => "openssl"),
-	array("Name" => "Mbstring", "Extention" => "mbstring"),
-	array("Name" => "Tokenizer", "Extention" => "tokenizer"),
-	array("Name" => "XML", "Extention" => "xml"),
-	array("Name" => "Ctype", "Extention" => "ctype"),
-	array("Name" => "JSON", "Extention" => "json"),
-	array("Name" => "BCMath", "Extention" => "bcmath"),
-	array("Name" => "ZIP", "Extention" => "zip"),
-	array("Name" => "PDO", "Extention" => "PDO"),
-	array("Name" => "GMP", "Extention" => "gmp"),
-	array("Name" => "Bzip2", "Extention" => "bz2"),
+	"OpenSSL" => "openssl",
+	"Mbstring" => "mbstring",
+	"Tokenizer" => "tokenizer",
+	"JSON" => "json",
+	"XML" => "xml",
+	"Ctype" => "ctype",
+	"BCMath" => "bcmath",
+	"ZIP" => "zip",
+	"PDO" => "PDO",
+	"ZIP" => "zip",
+	"GMP" => "gmp",
+	"Bzip2" => "bz2",
 );
 if (ini_get('allow_url_fopen')) {
 	$fopen_status = '<span class="text-success">Enabled</span>';
@@ -56,8 +57,8 @@ if (function_exists("escapeshellarg")) {
 			</thead>
 			<tbody>
 				<?php
-				foreach ($extentions as $ext) {
-					if (!extension_loaded($ext['Extention'])) {
+				foreach ($extentions as  $k => $v) {
+					if (!extension_loaded($v)) {
 						if ($status != false) {
 							$status = false;
 						}
@@ -67,7 +68,7 @@ if (function_exists("escapeshellarg")) {
 					}
 				?>
 					<tr>
-						<td><?= htmlspecialchars($ext['Name']); ?></td>
+						<td><?= htmlspecialchars($k); ?></td>
 						<td> <?= htmlspecialchars_decode($ext_status); ?></td>
 					</tr>
 
@@ -88,10 +89,10 @@ if (function_exists("escapeshellarg")) {
 		<?php
 		if ($status == true) {
 			$babl_status = "<span class='text-success'>Babl is compatable!</span>";
-			$msg="Your webserver should be ready to go for babl! If you are still expieriencing issues, please create a <a href='https://www.gmodstore.com/help/tickets/create/addon/6490'>support ticket</a> on Gmodstore or come ask us in the <a href='https://discord.gg/HfgcZKs'>discord server</a>.";
+			$msg = "Your webserver should be ready to go for babl! If you are still expieriencing issues, please create a <a href='https://www.gmodstore.com/help/tickets/create/addon/6490'>support ticket</a> on Gmodstore or come ask us in the <a href='https://discord.gg/HfgcZKs'>discord server</a>.";
 		} else {
 			$babl_status = "<span class='text-danger'>Babl is not compatable!</span>";
-			$msg="Please address the following issues in the above table.";
+			$msg = "Please address the following issues in the above table.";
 		}
 		?>
 		<div class="card">
@@ -100,7 +101,7 @@ if (function_exists("escapeshellarg")) {
 				<p class="card-text" style="font-size:1.2em"><?php echo $msg; ?></p>
 			</div>
 		</div>
-		
+
 		<br>
 	</div>
 </body>
