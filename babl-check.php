@@ -111,7 +111,7 @@ if (function_exists("escapeshellarg")) {
 			$babl_status = "<span class='text-success'>Babl is compatable!</span>";
 			$msg = "Your webserver should be ready to go for babl! If you are still expieriencing issues, please create a <a href='https://www.gmodstore.com/help/tickets/create/addon/6490'>support ticket</a> on Gmodstore or come ask us in the <a href='https://discord.gg/HfgcZKs'>discord server</a>.";
 		} else {
-			$babl_status = "<span class='text-danger'>Babl is not compatable!</span>";
+			$babl_status = "<span class='text-danger'>Babl is not supported on your configuration!</span>";
 			$msg = "Please address the following issues in the above table.";
 		}
 		?>
