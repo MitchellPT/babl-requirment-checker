@@ -1,10 +1,10 @@
 <?php
 $status = true;
 if (version_compare(phpversion(), '7.2', '<') || version_compare(phpversion(), '7.2.999', '>')) {
-	$php_status = 'Your PHP version is not supported';
+	$php_status = '<span class="text-danger">Your PHP version is not supported. Please switch to 7.1 or 7.2.</span>';
 	$status = false;
 } else {
-	$php_status = "Your PHP Version is compatable";
+	$php_status = '<span class="text-success">'.phpversion().'</span>';
 }
 $extentions = array(
 	"OpenSSL" => "openssl",
@@ -56,6 +56,10 @@ if (function_exists("escapeshellarg")) {
 				</tr>
 			</thead>
 			<tbody>
+				<tr>
+					<td>PHP Version</td>
+					<td><?= htmlspecialchars_decode($php_status); ?></td>
+				</tr>
 				<?php
 				foreach ($extentions as  $k => $v) {
 					if (!extension_loaded($v)) {
