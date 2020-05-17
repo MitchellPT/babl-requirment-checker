@@ -4,7 +4,7 @@ if (version_compare(phpversion(), '7.2', '<') || version_compare(phpversion(), '
 	$php_status = '<span class="text-danger">Your PHP version is not supported. Please switch to 7.1 or 7.2.</span>';
 	$status = false;
 } else {
-	$php_status = '<span class="text-success">'.phpversion().'</span>';
+	$php_status = '<span class="text-success">' . phpversion() . '</span>';
 }
 $extentions = array(
 	"OpenSSL" => "openssl",
@@ -44,11 +44,23 @@ if (function_exists("escapeshellarg")) {
 </head>
 
 <body>
+	<style>
+		body {
+			background-color: #232221;
+			color: white
+		}
+		.card{
+			background-color: #31302F;
+		}
+		.table-dark{
+			background-color: #31302F
+		}
+	</style>
 	<div class="container" style="padding-top:10px">
 		<h1>Babl Compatability Checker</h1>
 		<h5><a href="https://github.com/MitchellPT/babl-requirment-checker">Github</a> &bull; <a href="https://www.gmodstore.com/market/view/babl-where-a-community-thrives">Babl</a></h5>
 		<br>
-		<table class="table table-bordered table-hover">
+		<table class="table table-bordered table-dark table-hover">
 			<thead>
 				<tr>
 					<th scope="col">Name</th>
