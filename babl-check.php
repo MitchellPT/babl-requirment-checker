@@ -1,150 +1,132 @@
 <?php
-	
-	$status = true;
-	
-	if (version_compare(phpversion(), '7.2', '<') || version_compare(phpversion(), '7.2.999', '>')) {
-		$php_status = 'Your PHP version is not supported';
-		$status = false;
-	} else {
-		$php_status = "Your PHP Version is compatable";
-	}
-	
-	
-	if (!extension_loaded('openssl')) {
-		$status = false;
-		$openssl_status = "&#10060;";
-	} else {
-		$openssl_status = "&#9989;";
-	}
-	if (!extension_loaded('mbstring')) { 
-		$status = false;
-		$mbstring_status = "&#10060;";
-	} else {
-		$mbstring_status = "&#9989;";
-	}
-	if (!extension_loaded('tokenizer')) { 
-		$status = false;
-		$tokenizer_status = "&#10060;";
-	} else {
-		$tokenizer_status = "&#9989;";
-	}
-	if (!extension_loaded('xml')) { 
-		$status = false;
-		$xml_status = "&#10060;";
-	} else {
-		$xml_status = "&#9989;";
-	}
-	if (!extension_loaded('ctype')) { 
-		$status = false;
-		$ctype_status = "&#10060;";
-	} else {
-		$ctype_status = "&#9989;";
-	}
-	if (!extension_loaded('json')) { 
-		$status = false;
-		$json_status = "&#10060;";
-	} else {
-		$json_status = "&#9989;";
-	}
-	if (!extension_loaded('bcmath')) { 
-		$status = false;
-		$bcmath_status = "&#10060;";
-	} else {
-		$bcmath_status = "&#9989;";
-	}
-	if (!extension_loaded('zip')) { 
-		$status = false;
-		$zip_status = "&#10060;";
-	} else {
-		$zip_status = "&#9989;";
-	}
-	if (!extension_loaded('PDO')) { 
-		$status = false;
-		$PDO_status = "&#10060;";
-	} else {
-		$PDO_status = "&#9989;";
-	}
-	if (!extension_loaded('gmp')) { 
-		$status = false;
-		$gmp_status = "&#10060;";
-	} else {
-		$gmp_status = "&#9989;";
-	}
-	if (!extension_loaded('bz2')) { 
-		$status = false;
-		$bz2_status = "&#10060;";
-	} else {
-		$bz2_status = "&#9989;";
-	}
-	if( ini_get('allow_url_fopen') ) {
-		$fopen_status = "&#9989;";
-	} else {
-		$status = false;
-		$fopen_status = "&#10060;";
-	}
-	if ( function_exists("escapeshellarg")) {
-        $escapeshellarg_status = "&#9989;";
-    } else {
-        $status = false;
-		$escapeshellarg_status = "&#10060;";
-    }
-	if ($status == true) {
-		$babl_status = "<span style=\"font-weight:bold;font-size: 1.2em;color: green;\">Babl is compatable!</span>";
-	} else {
-		$babl_status = "<span style=\"font-weight:bold;color: red;\">Babl is not supported on your configuration</span>";
-	}
+$status = true;
+if (version_compare(phpversion(), '7.2', '<') || version_compare(phpversion(), '7.2.999', '>')) {
+	$php_status = '<span class="text-danger">Your PHP version is not supported. Please switch to 7.1 or 7.2.<br> (Current Version: '. phpversion() .')</span>';
+	$status = false;
+} else {
+	$php_status = '<span class="text-success">' . phpversion() . '</span>';
+}
+$extentions = array(
+	"OpenSSL" => "openssl",
+	"Mbstring" => "mbstring",
+	"Tokenizer" => "tokenizer",
+	"JSON" => "json",
+	"XML" => "xml",
+	"Ctype" => "ctype",
+	"BCMath" => "bcmath",
+	"ZIP" => "zip",
+	"PDO" => "PDO",
+	"ZIP" => "zip",
+	"GMP" => "gmp",
+	"Bzip2" => "bz2",
+);
+if (ini_get('allow_url_fopen')) {
+	$fopen_status = '<span class="text-success">Enabled</span>';
+} else {
+	$status = false;
+	$fopen_status = '<span class="text-danger">Disabled</span>';
+}
+if (function_exists("escapeshellarg")) {
+	$escapeshellarg_status = '<span class="text-success">Enabled</span>';
+} else {
+	$status = false;
+	$escapeshellarg_status = '<span class="text-danger">Disabled</span>';
+}
+
 ?>
 <html>
-	<head>
-		<title>Compatability</title>
-	</head>
-	<body>
-		<?php echo $babl_status; ?>
-		<br>
-		<br>
-		PHP: <?php echo $php_status; ?>
-		<br>
-		OpenSSL: <?php echo $openssl_status; ?>
-		<br>
-		Tokenizer: <?php echo $tokenizer_status; ?>
-		<br>
-		XML: <?php echo $xml_status; ?>
-		<br>
-		Ctype: <?php echo $ctype_status; ?>
-		<br>
-		JSON: <?php echo $json_status; ?>
-		<br>
-		BCMath: <?php echo $bcmath_status; ?>
-		<br>
-		ZIP: <?php echo $zip_status; ?>
-		<br>
-		PDO: <?php echo $PDO_status; ?>
-		<br>
-		GMP: <?php echo $gmp_status; ?>
-		<br>
-		Mbstring: <?php echo $mbstring_status; ?>
-		<br>
-		Bzip2: <?php echo $bz2_status; ?>
-		<br>
-		allow_url_fopen: <?php echo $fopen_status; ?>
-		<br>
-		escapeshellarg: <?php echo $escapeshellarg_status; ?>
-		<br>
-		<br>
-		Most are the settings can be changed via your WebHosting providers panel
-		
-		
-	</body>
-	<style>
-		body {background-color: #36393f;text-align: center;color:grey;font-family: sans-serif;}
-	</style>
 
+<head>
+	<base target="_blank">
+	<title>Babl Compatability Checker</title>
+	<meta name="viewport" content="width = device-width, initial-scale = 1">
+	<link href="https://driedsponge.net/resources/bablicon.ico" rel="icon" type="image/icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+	<style>
+		body {
+			background-color: #232221;
+			color: white
+		}
+		.card{
+			background-color: #31302F;
+		}
+		.table-dark{
+			background-color: #31302F
+		}
+	</style>
+	<div class="container" style="padding-top:10px">
+		<h1>Babl Compatability Checker</h1>
+		<h5><a href="https://github.com/MitchellPT/babl-requirment-checker">Github</a> &bull; <a href="https://www.gmodstore.com/market/view/babl-where-a-community-thrives">Babl</a> &bull; <a href="https://docs.rainn.xyz">Babl Docs</a> </h5>
+		<hr style="background-color: white">
+		<br>
+		<div class="table-responsive">
+		<table class="table  table-bordered table-dark table-hover" >
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+					<th scope="col">Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>PHP Version</td>
+					<td><b><?= htmlspecialchars_decode($php_status); ?></b></td>
+				</tr>
+				<?php
+				foreach ($extentions as  $k => $v) {
+					if (!extension_loaded($v)) {
+						if ($status != false) {
+							$status = false;
+						}
+						$ext_status = '<span class="text-danger">Disabled</span>';
+					} else {
+						$ext_status = '<span class="text-success">Enabled</span>';
+					}
+				?>
+					<tr>
+						<td><?= htmlspecialchars($k); ?></td>
+						<td><b><?= htmlspecialchars_decode($ext_status); ?></b></td>
+					</tr>
+
+				<?php
+				}
+				?>
+				<tr>
+					<td>allow_url_fopen</td>
+					<td><b><?php echo $fopen_status; ?></b></td>
+				</tr>
+				<tr>
+					<td>escapeshellarg (PHP Fucntion)</td>
+					<td><b><?php echo $escapeshellarg_status; ?></b></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		<br>
+		<?php
+		if ($status == true) {
+			$babl_status = "<span class='text-success'>Babl is compatable!</span>";
+			$msg = "Your webserver should be ready to go for babl! If you are still expieriencing issues, please create a <a href='https://www.gmodstore.com/help/tickets/create/addon/6490'>support ticket</a> on Gmodstore or come ask us in the <a href='https://discord.gg/HfgcZKs'>discord server</a>.";
+		} else {
+			$babl_status = "<span class='text-danger'>Babl is not supported on your configuration!</span>";
+			$msg = "Please address the following issues in the above table.";
+		}
+		?>
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title" style="font-size:1.7em"><?php echo $babl_status; ?></h5>
+				<p class="card-text" style="font-size:1.2em"><?php echo $msg; ?></p>
+			</div>
+		</div>
+
+		<br>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 </html>
-<?php
-//You can enable if you want to see all your extentions
-//print_r(get_loaded_extensions());
-?>
-
-
-
