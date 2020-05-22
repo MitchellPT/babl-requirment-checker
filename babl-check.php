@@ -19,6 +19,7 @@ $extentions = array(
 	"ZIP" => "zip",
 	"GMP" => "gmp",
 	"Bzip2" => "bz2",
+	"CURL" => "curl"
 );
 if (ini_get('allow_url_fopen')) {
 	$fopen_status = '<span class="text-success">Enabled</span>';
