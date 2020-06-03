@@ -100,7 +100,7 @@ if (function_exists("escapeshellarg")) {
 					<td><b><?php echo $fopen_status; ?></b></td>
 				</tr>
 				<tr>
-					<td>escapeshellarg (PHP Fucntion)</td>
+					<td>escapeshellarg (PHP Function)</td>
 					<td><b><?php echo $escapeshellarg_status; ?></b></td>
 				</tr>
 			</tbody>
